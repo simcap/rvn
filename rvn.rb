@@ -37,24 +37,25 @@ module Raven
     end
     
     def run(arguments)
-      @arguments = arguments
-      if @arguments[0] == "dep"
+      if arguments.first == "dep"
         @console.out(list_dep)
         return
-      elsif @arguments[0] == "search"
-        if @arguments[1]
+      elsif arguments.first == "search"
+        if arguments[1]
           found_info = search_dep(*arguments[1].split(":"))
           @console.out(found_info)
         else
           @console.out("No dependency coordinates provided. Run the help")
         end
       else
-        delegate_to_maven
+        delegate_to_maven(arguments)
       end
     end
     
-    def delegate_to_maven
-      command = "mvn #{@arguments.join(' ')}"
+    private
+    
+    def delegate_to_maven(arguments)
+      command = "mvn #{arguments.join(' ')}"
       IO.popen(command) { |maven|
         maven.each do |line|
           @console.out line
