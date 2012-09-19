@@ -20,7 +20,7 @@ module Raven
     def list_dep
       pom_as_doc.css('dependencies > dependency').map { |node|
         "#{node.xpath('groupId').text}:#{node.xpath('artifactId').text}:#{node.xpath('version').text}"
-      }.join(":")
+      }.join("\n")
     end
     
     def search_dep(group_id, artifact_id = nil, version = nil)
@@ -34,6 +34,7 @@ module Raven
   
     def initialize
       @console = Raven::Console.new
+      self
     end
     
     def run(arguments)
@@ -131,7 +132,7 @@ module Raven
     end
     
     def cannot_find(*coordinates)
-      "Cannot find #{coordinates.join(":")} in maven repo" 
+      "Cannot find '#{coordinates.join(":")}' in maven repo" 
     end
     
     def group_valid?
