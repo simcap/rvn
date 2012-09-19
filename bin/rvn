@@ -1,4 +1,4 @@
 #! /usr/bin/env ruby
-require File.expand_path('../../rvn.rb', __FILE__)
+require File.expand_path('../../raven.rb', __FILE__)
 
 Raven::Rvn.new.run(ARGV)

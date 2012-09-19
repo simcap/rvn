@@ -1,4 +1,4 @@
-require File.expand_path('../../rvn.rb', __FILE__)
+require File.expand_path('../../raven.rb', __FILE__)
 include Raven
 
 describe Rvn do
