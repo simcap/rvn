@@ -87,7 +87,7 @@ module Raven
       if dependency_valid?
         dependency_as_xml
       else
-        "Cannot find #{@group}:#{@artifact}:#{@version} in maven repo" 
+        cannot_find(@group, @artifact, @version)
       end
     end
     
@@ -96,7 +96,7 @@ module Raven
         response_body = self.class.get("/#{@group}/#{@artifact}").body
         parse_response(response_body, "//table/tr/td/a[@class='versionbutton release']")
       else
-        "Cannot find #{@group}:#{@artifact} in maven repo" 
+        cannot_find(@group, @artifact)
       end
     end
     
@@ -105,7 +105,7 @@ module Raven
         response_body = self.class.get("/#{@group}").body
         parse_response(response_body, "//div[@id='maincontent']/table/tr/td/a[not(@class)]")
       else
-        "Cannot find #{@group} in maven repo" 
+        cannot_find(@group)
       end
     end
     
@@ -127,6 +127,10 @@ module Raven
         }
       end
       builder.to_xml      
+    end
+    
+    def cannot_find(*coordinates)
+      "Cannot find #{coordinates.join(":")} in maven repo" 
     end
     
     def group_valid?
