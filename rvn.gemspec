@@ -1,5 +1,5 @@
 spec = Gem::Specification.new do |s| 
-  s.name = 'raven'
+  s.name = 'rvn'
   s.version = 0.1
   s.author = 'Simon Caplette'
   s.homepage = 'https://github.com/simcap/raven'
