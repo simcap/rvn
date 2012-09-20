@@ -2,6 +2,7 @@
 require 'rainbow'
 require 'nokogiri'
 require 'httparty'
+require 'terminal-table'
 
 module Raven
   
@@ -96,7 +97,8 @@ module Raven
     def versions
       if group_and_artifact_valid?
         response_body = self.class.get("/#{@group}/#{@artifact}").body
-        parse_response(response_body, "//table/tr/td/a[@class='versionbutton release']")
+        versions = parse_response(response_body, "//table/tr/td/a[@class='versionbutton release']")
+        as_table("Available versions for #{@group}:#{@artifact}", versions)
       else
         cannot_find(@group, @artifact)
       end
@@ -105,7 +107,8 @@ module Raven
     def artifacts
       if group_valid?
         response_body = self.class.get("/#{@group}").body
-        parse_response(response_body, "//div[@id='maincontent']/table/tr/td/a[not(@class)]")
+        artifacts = parse_response(response_body, "//div[@id='maincontent']/table/tr/td/a[not(@class)]")
+        as_table("Available artifacts for #{@group}", artifacts)
       else
         cannot_find(@group)
       end
@@ -115,9 +118,9 @@ module Raven
       items_found = []
       html_doc = Nokogiri::HTML(body)
       html_doc.xpath(xpath_expression).each do |node|
-        items_found << node.text
+        items_found << [node.text]
       end
-      items_found.join("\n")
+      items_found
     end
         
     def dependency_as_xml
@@ -129,6 +132,10 @@ module Raven
         }
       end
       builder.to_xml      
+    end
+    
+    def as_table(title, rows)
+      Terminal::Table.new :headings => [title], :rows => rows
     end
     
     def cannot_find(*coordinates)
@@ -164,12 +171,16 @@ module Raven
   class Console
   
     def out(content)
-      content.each_line { |line|
-        line = line.foreground(:red) if line =~ /^\[ERROR\]/
-        line = line.foreground(:green) if line =~ /SUCCESS/
-        line = line.foreground(:yellow) if line =~ /^\[WARNING\]/
-        print line
-      }
+      if content.class == Terminal::Table
+        puts content 
+      else
+        content.each_line { |line|
+          line = line.foreground(:red) if line =~ /^\[ERROR\]/
+          line = line.foreground(:green) if line =~ /SUCCESS/
+          line = line.foreground(:yellow) if line =~ /^\[WARNING\]/
+          print line
+        }
+      end
     end
   
   end
