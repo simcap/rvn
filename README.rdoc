@@ -21,45 +21,45 @@ To uninstall
 	
     $ rvn search springframework
 
-	+-----------------------------------------+
-	| Available artifacts for springframework |
-	+-----------------------------------------+
-	| spring                                  |
-	| spring-mock                             |
-	| spring-core                             |
-	| spring-context                          |
-	| spring-beans                            |
-	| spring-web                              |
-	| spring-webmvc                           |
-	| spring-orm                              |
-	| spring-aop                              |
-	| spring-dao                              |
-	| spring-full                             |
-	| spring-remoting                         |
-	| spring-parent                           |
-	| spring-hibernate                        |
-	| spring-jdbc                             |
-	| spring-support                          |
-	+-----------------------------------------+
+    +-----------------------------------------+
+    | Available artifacts for springframework |
+    +-----------------------------------------+
+    | spring                                  |
+    | spring-mock                             |
+    | spring-core                             |
+    | spring-context                          |
+    | spring-beans                            |
+    | spring-web                              |
+    | spring-webmvc                           |
+    | spring-orm                              |
+    | spring-aop                              |
+    | spring-dao                              |
+    | spring-full                             |
+    | spring-remoting                         |
+    | spring-parent                           |
+    | spring-hibernate                        |
+    | spring-jdbc                             |
+    | spring-support                          |
+    +-----------------------------------------+
 	
 	$ rvn search springframework:spring-remoting
 	
-	+--------------------------------------------------------+
-	| Available versions for springframework:spring-remoting |
-	+--------------------------------------------------------+
-	| 1.2.6                                                  |
-	| 1.2.5                                                  |
-	| 1.2.4                                                  |
-	| 1.2.3                                                  |
-	| 1.2.2                                                  |
-	| 1.2.1                                                  |
-	| 1.2                                                    |
-	+--------------------------------------------------------+
+    +--------------------------------------------------------+
+    | Available versions for springframework:spring-remoting |
+    +--------------------------------------------------------+
+    | 1.2.6                                                  |
+    | 1.2.5                                                  |
+    | 1.2.4                                                  |
+    | 1.2.3                                                  |
+    | 1.2.2                                                  |
+    | 1.2.1                                                  |
+    | 1.2                                                    |
+    +--------------------------------------------------------+
 	
 	$ rvn search springframework:spring-remoting:1.2.6
 	
-	<dependency>
-	  <groupId>springframework</groupId>
-	  <artifactId>spring-remoting</artifactId>
-	  <version>1.2.6</version>
-	</dependency>
+    <dependency>
+        <groupId>springframework</groupId>
+        <artifactId>spring-remoting</artifactId>
+        <version>1.2.6</version>
+    </dependency>
